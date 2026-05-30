@@ -93,8 +93,9 @@ html, body {
 }
 
 .hero {
-  height: 100vh;
-  min-height: 620px;
+  overflow: hidden;
+  height: calc(100vh - 60px);
+  min-height: 520px;
   background: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=2000&q=80') center / cover no-repeat;
   position: relative;
   display: flex;
@@ -108,19 +109,20 @@ html, body {
 }
 
 .hero-content {
+  width: 45%;
   position: relative;
   display: flex;
   align-items: flex-start;
 }
 
 .hero-left {
-  max-width: 680px;
+  max-width: 420px;        /* was 680px — too wide, bleeds into panel */
   padding-left: 48px;
 }
 
 .hero-left h1 {
   font-family: 'Montserrat', sans-serif;
-  font-size: 88px;
+  font-size: 72px;
   line-height: 0.9;
   margin: 0 0 18px;
   font-weight: 800;
@@ -150,7 +152,7 @@ html, body {
 }
 
 .site-footer {
-  padding: 24px 0;
+  padding: 16px 0;
   text-align: center;
   color: rgba(255, 255, 255, 0.7);
 }
@@ -454,5 +456,93 @@ main {
   }
   .search input {
     display: none;
+  }
+}
+/* ── Results Panel (overlays right side of hero) ── */
+.results-panel {
+  position: absolute;
+  top: 57px;
+  right: 0;
+  width: 42%;
+  height: calc(100% - 57px);   /* subtract header so it doesn't overflow into footer */
+  overflow-y: auto;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: rgba(4, 35, 45, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.time-banner {
+  background: var(--teal);
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 16px 24px;  /* slightly more padding top/bottom */
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rec-card {
+  background: #fff;
+  color: #111;
+  flex-shrink: 0;
+}
+
+.rec-card img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  display: block;
+}
+
+.rec-card-body {
+  padding: 20px 24px 24px;
+}
+
+.rec-card-body h3 {
+  margin: 0 0 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #0a1a1f;
+}
+
+.rec-card-body p {
+  margin: 0 0 16px;
+  color: #444;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.visit-btn {
+  background: var(--teal);
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.visit-btn:hover {
+  background: #118d8d;
+}
+
+/* Hide scrollbar but keep scroll */
+.results-panel::-webkit-scrollbar { width: 0; }
+
+@media (max-width: 900px) {
+  .results-panel {
+    width: 100%;
+    top: auto;
+    bottom: 0;
+    height: 55%;
   }
 }
